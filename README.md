@@ -2,6 +2,8 @@
 
 Python library and command line tool for SEKONIC spectrometers remote control.
 
+[![PyPI](https://img.shields.io/pypi/v/skreader)](https://pypi.org/project/skreader/)
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/skreader)](https://pypi.org/project/skreader/)
 [![CI](https://github.com/akares/skreader-py/actions/workflows/ci.yml/badge.svg)](https://github.com/akares/skreader-py/actions/workflows/ci.yml)
 [![codecov](https://codecov.io/gh/akares/skreader-py/branch/main/graph/badge.svg)](https://codecov.io/gh/akares/skreader-py)
 
