@@ -1,4 +1,12 @@
 .DS_Store
 .venv/
+.mypy_cache/
 dist/
 poetry.lock
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pyw
+*.pyz
+*.pywz

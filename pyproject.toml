@@ -53,3 +53,29 @@ target-version = ["py39", "py310", "py311", "py312", "py313"]
 
 [tool.pyright]
 mode = "strict"
+
+[tool.mypy]
+strict = true
+python_version = 3.9
+check_untyped_defs = true
+disallow_any_generics = true
+disallow_untyped_defs = true
+ignore_missing_imports = false
+namespace_packages = true
+show_error_codes = true
+strict_optional = false
+warn_redundant_casts = true
+warn_return_any = true
+warn_unused_ignores = true
+
+[[tool.mypy.overrides]]
+module = "skreader.usbadapter"
+disallow_subclassing_any = false
+disable_error_code = ["import-untyped", "no-any-return"]
+
+[tool.isort]
+color_output = true
+line_length = 80
+profile = "black"
+src_paths = ["skreader"]
+multi_line_output = 3

@@ -8,15 +8,17 @@ Names are kept as close as possible to the original SDK.
 import struct
 
 
-def ParseFloat(data, pos):
-    return struct.unpack(">f", data[pos : pos + 4])[0]
+def ParseFloat(data: bytes, pos: int) -> float:
+    return float(struct.unpack(">f", data[pos : pos + 4])[0])
 
 
-def ParseDouble(data, pos):
-    return struct.unpack(">d", data[pos : pos + 8])[0]
+def ParseDouble(data: bytes, pos: int) -> float:
+    return float(struct.unpack(">d", data[pos : pos + 8])[0])
 
 
-def FloatToStr(val, low_limit, high_limit, ndigits):
+def FloatToStr(
+    val: float, low_limit: float, high_limit: float, ndigits: int
+) -> str:
     if val < low_limit:
         return "Under"
 
@@ -26,7 +28,7 @@ def FloatToStr(val, low_limit, high_limit, ndigits):
     return f"{val:.{ndigits}f}"
 
 
-def LuxFloatToStr(val, low_limit, high_limit):
+def LuxFloatToStr(val: float, low_limit: float, high_limit: float) -> str:
     if val < 9.9499998092651367:
         val = round(val, 2)
     elif val < 99.949996948242188:

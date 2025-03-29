@@ -4,17 +4,26 @@ Seconic USB device handler class.
 Based on original C-7000 SDK from Sekonic.
 """
 
-import array
 from dataclasses import dataclass
 
 from . import usbadapter
-from .const import *
+from .const import (
+    SKF_EXPOSURE_TIME,
+    SKF_FIELD_OF_VIEW,
+    SKF_MEASURING_MODE,
+    SKF_REMOTE,
+    SKF_SHUTTER_SPEED,
+    SKF_STATUS_BUTTON,
+    SKF_STATUS_DEVICE,
+    SKF_STATUS_RING,
+)
 from .measurement import MeasurementResult
 
 SK_VENDOR_ID = 0x0A41  # SEKONIC
 SK_PRODUCT_ID = 0x7003  # SPECTROMASTER
 
-RESP_OK = array.array("B", [6, 48])
+
+RESP_OK = bytes([6, 48])
 
 
 class DeviceNotFoundError(Exception):
@@ -69,7 +78,11 @@ class Device:
             return "Not connected"
         if self.device is None:
             return "Device not found"
-        return f"{self.device.manufacturer} {self.model_name} FW v{self.fw_version}"  # type: ignore
+        return (
+            f"{self.device.manufacturer} "
+            f"{self.model_name} "
+            f"FW v{self.fw_version}"
+        )
 
     def init_usb(self) -> None:
         try:
@@ -236,6 +249,6 @@ class Device:
     def cmd_get_measuring_result(self) -> MeasurementResult:
         data = self.run_cmd_or_error("NR", errmsg="cmd_get_measuring_result")
         try:
-            return MeasurementResult(data)  # type: ignore
+            return MeasurementResult(data)
         except ValueError as e:
             raise CommandError("cmd_get_measuring_result: " + str(e))

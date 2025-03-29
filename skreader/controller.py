@@ -11,12 +11,12 @@ import time
 from .const import SKF_STATUS_BUTTON, SKF_STATUS_DEVICE, SKF_STATUS_RING
 from .device import (
     CommandError,
-    DeviceNotFoundError,
-    USBEndpointNotFoundError,
-    MeasurementResult,
     Device,
     DeviceInfo,
+    DeviceNotFoundError,
+    USBEndpointNotFoundError,
 )
+from .measurement import MeasurementResult
 from .testdata import ret_ok as FAKE_MEASUREMENT
 
 FAKE_MEASUREMENT_DELAY_SEC = 0.1
@@ -64,7 +64,7 @@ class Sekonic:
 
         try:
             self.device.cmd_set_remote_mode_off()
-        except CommandError as e:
+        except CommandError:
             # TODO: let the caller know that the device is in an unknown state
             pass
 

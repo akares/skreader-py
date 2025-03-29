@@ -6,9 +6,9 @@ import sys
 
 from rich_argparse import RichHelpFormatter
 
-version = importlib.metadata.version("skreader")
-
 import skreader
+
+version = importlib.metadata.version("skreader")
 
 
 def cmd_info(args: argparse.Namespace, sk: skreader.Sekonic) -> None:
@@ -132,9 +132,11 @@ def cmd_measure(args: argparse.Namespace, sk: skreader.Sekonic) -> None:
         print("R9:", meas.ColorRenditionIndexes.Ri[8])
 
 
-def run():
+def run() -> None:
     parser = argparse.ArgumentParser(
-        description="Command line tool for SEKONIC spectrometers remote control.",
+        description=(
+            "Command line tool for SEKONIC spectrometers remote control."
+        ),
         formatter_class=RichHelpFormatter,
     )
     parser.add_argument("--version", action="version", version=version)

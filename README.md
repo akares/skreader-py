@@ -148,13 +148,23 @@ except KeyboardInterrupt:
 
 As 3.9 is the minimum supported by the library version of Python, it is recommended to use it during development to avoid backward compatibility issues introduced by newer versions.
 
-Poetry is used for dependency management and virtual environment creation. It is recommended to use it for library development.
+`Poetry` is used for dependency management and virtual environment creation. It is recommended to use it for library development.
 
 ```sh
 poetry env use 3.9
 poetry install
 poetry run ./skreader/cli.py
 ```
+
+`MyPy` and `Flake8` are used for linting.
+
+```sh
+poetry run mypy skreader
+poetry run flake8 skreader
+```
+
+`Black` is used for code formatting.\
+`isort` is used for sorting imports.
 
 ## License
 

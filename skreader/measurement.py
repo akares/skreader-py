@@ -5,12 +5,10 @@ Based on original C-7000 SDK from Sekonic.
 Names are kept as close as possible to the original SDK.
 """
 
-import array
-
 from dataclasses import dataclass, field
 from typing import NewType
 
-from .conv import ParseFloat, ParseDouble, FloatToStr, LuxFloatToStr
+from .conv import FloatToStr, LuxFloatToStr, ParseDouble, ParseFloat
 
 
 @dataclass
@@ -92,13 +90,15 @@ class MeasurementResult:
     ColorRenditionIndexes: ColorRenditionIndexesValue  # Color Rendition Indexes
     Illuminance: IlluminanceValue  # Illuminance (LUX)
     DWL: DominantWavelengthValue  # Dominant Wavelength
-    PPFD: PhotosyntheticPhotonFluxDensityValue  # Photosynthetic Photon Flux Density
+    PPFD: (
+        PhotosyntheticPhotonFluxDensityValue  # PhotosyntheticPhotonFluxDensity
+    )
     PeakWavelength: PeakWavelengthValue  # Peak Wavelength
     SpectralData_1nm: list[float]  # Spectral Data 380-780nm (1nm step)
     SpectralData_5nm: list[float]  # Spectral Data 380-780nm (5nm step)
     LimFlag: int  # 0 if no limits exceeded during measurement
 
-    def __init__(self, data: array.array) -> None:
+    def __init__(self, data: bytes) -> None:
         if len(data) != 2380:
             raise ValueError(
                 f"Invalid measurement data size {len(data)} != 2380"
@@ -109,7 +109,8 @@ class MeasurementResult:
             Tcp=FloatToStr(ParseFloat(data, 50), 1563, 100000, 0),
             Delta_uv=FloatToStr(ParseFloat(data, 55), -0.1, 0.1, 4),
         )
-        # Limit the CCT value (SK C-800 returns Tcp=50000 value instead of "Over" as C-7000 does)
+        # Limit the CCT value (SK C-800 returns Tcp=50000 value instead of
+        # "Over" as C-7000 does)
         if self.ColorTemperature.Delta_uv in ["Under", "Over"]:
             self.ColorTemperature.Tcp = self.ColorTemperature.Delta_uv
 
