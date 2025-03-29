@@ -1,8 +1,11 @@
 .DS_Store
 .venv/
 .mypy_cache/
-dist/
+.pytest_cache/
+.coverage
 poetry.lock
+dist/
+htmlcov/
 __pycache__/
 *.pyc
 *.pyo

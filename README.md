@@ -2,6 +2,9 @@
 
 Python library and command line tool for SEKONIC spectrometers remote control.
 
+[![CI](https://github.com/akares/skreader-py/actions/workflows/ci.yml/badge.svg)](https://github.com/akares/skreader-py/actions/workflows/ci.yml)
+[![codecov](https://codecov.io/gh/akares/skreader-py/branch/main/graph/badge.svg)](https://codecov.io/gh/akares/skreader-py)
+
 Based on original C# SDK for Windows from SEKONIC.
 
 <img src="https://raw.githubusercontent.com/akares/skreader-py/main/doc/Sekonic-C-7000.jpg" width="640" alt="SEKONIC C-7000" />
@@ -154,6 +157,12 @@ As 3.9 is the minimum supported by the library version of Python, it is recommen
 poetry env use 3.9
 poetry install
 poetry run ./skreader/cli.py
+```
+
+`Pytest` is used to run unittests.
+
+```sh
+poetry run pytest -v
 ```
 
 `MyPy` and `Flake8` are used for linting.
