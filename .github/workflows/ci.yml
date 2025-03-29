@@ -30,7 +30,7 @@ jobs:
 
     - name: Run tests with coverage
       run: |
-        poetry run pytest --cov=skreader --cov-report=xml
+        poetry run pytest -o addopts="--cov=skreader --cov-report=xml"
 
     - name: Upload coverage to Codecov
       if: matrix.python-version == '3.9'
