@@ -81,12 +81,5 @@ profile = "black"
 src_paths = ["skreader"]
 multi_line_output = 3
 
-[tool.pytest]
-testpaths = ["tests"]
-python_files = ["test_*.py"]
-python_classes = ["Test*"]
-python_functions = ["test_*"]
-addopts = "--cov=skreader --cov-report=term --cov-report=html"
-
 [tool.coverage.run]
 omit = ["skreader/testdata.py", "skreader/cli.py"]
